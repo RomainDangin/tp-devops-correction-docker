@@ -42,4 +42,4 @@ jobs:
           run: docker build -t tp-devops-database:latest ./database
 
         - name: Build httpd Docker image
-          run: docker build -t tp-devops-httpd:latest ./httpd
+          run: docker build -t tp-devops-httpd:latest ./http-server
