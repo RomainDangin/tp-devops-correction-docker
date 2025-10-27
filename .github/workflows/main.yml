@@ -28,18 +28,18 @@ jobs:
       - name: Build and test with Maven
         run: mvn clean verify --file ./simple-api/pom.xml
 
-build-docker-images:
-    needs: test-backend
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  build-docker-images:
+      needs: test-backend
+      runs-on: ubuntu-24.04
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-      - name: Build backend Docker image
-        run: docker build -t tp-devops-simple-api:latest ./simple-api
+        - name: Build backend Docker image
+          run: docker build -t tp-devops-simple-api:latest ./simple-api
 
-      - name: Build database Docker image
-        run: docker build -t tp-devops-database:latest ./database
+        - name: Build database Docker image
+          run: docker build -t tp-devops-database:latest ./database
 
-      - name: Build httpd Docker image
-        run: docker build -t tp-devops-httpd:latest ./httpd
+        - name: Build httpd Docker image
+          run: docker build -t tp-devops-httpd:latest ./httpd
