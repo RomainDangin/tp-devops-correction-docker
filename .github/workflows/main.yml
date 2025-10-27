@@ -35,11 +35,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Connexion à Docker Hub
       - name: Login to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --username ${{ secrets.DOCKERHUB_USERNAME }}--password-stdin
 
-      # Build + Push backend
       - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
@@ -47,7 +45,6 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
-      # Build + Push database
       - name: Build and push database image
         uses: docker/build-push-action@v6
         with:
@@ -55,8 +52,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
-      # Build + Push httpd-server
-      - name: Build and push httpd-server image
+      - name: Build and push http-server image
         uses: docker/build-push-action@v6
         with:
           context: ./http-server
